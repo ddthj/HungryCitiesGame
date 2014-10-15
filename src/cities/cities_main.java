@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -13,6 +14,21 @@ public class cities_main extends Canvas implements Runnable{
 	public static final int WIDTH = 250, HEIGHT = 250, SCALE = 2;
 	public static boolean running = false;
 	public Thread citiesThread;
+	//private BufferedImage grass;
+	//private BufferedImage dirt;
+	//private BufferedImage trees;
+	//private BufferedImage scrap;
+	private BufferedImage cityimg;
+	private City city;
+	public void init(){
+		cities_gfx gfx = new cities_gfx();
+		//grass = gfx.load("/CHGME");
+		//dirt = gfx.load("/CHGME");
+		//trees = gfx.load("/CHGME");
+		//scrap = gfx.load("/CHGME");
+		cityimg = gfx.load("/city.png");
+		city = new City(0,0,cityimg);
+	}
 	public synchronized void start(){
 		if(running)return;
 		running = true;
@@ -28,6 +44,7 @@ public class cities_main extends Canvas implements Runnable{
 	}
 	
 	public void tick() {
+		city.tick();
 		
 	}
 	public void render(){
@@ -38,10 +55,12 @@ public class cities_main extends Canvas implements Runnable{
 		}
 		Graphics g = bs.getDrawGraphics();
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
+		city.render(g);
 		g.dispose();
 		bs.show();
 	}
 	public void run() {
+		init();
 		long lastTime = System.nanoTime();
 		final double amountOfTicks = 60D;
 		double ns = 1000000000 / amountOfTicks;
