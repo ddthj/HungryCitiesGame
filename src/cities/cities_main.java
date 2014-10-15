@@ -18,7 +18,7 @@ public class cities_main extends Canvas implements Runnable{
 	//private BufferedImage dirt;
 	//private BufferedImage trees;
 	//private BufferedImage scrap;
-	private BufferedImage cityimg;
+	private BufferedImage cityImage;
 	private City city;
 	public void init(){
 		cities_gfx gfx = new cities_gfx();
@@ -26,8 +26,8 @@ public class cities_main extends Canvas implements Runnable{
 		//dirt = gfx.load("/CHGME");
 		//trees = gfx.load("/CHGME");
 		//scrap = gfx.load("/CHGME");
-		cityimg = gfx.load("/city.png");
-		city = new City(0,0,cityimg);
+		cityImage = gfx.load("/city.png");
+		city = new City(0,0,cityImage);
 	}
 	public synchronized void start(){
 		if(running)return;
