@@ -2,6 +2,7 @@ package ghp.tilegame.main;
 
 import ghp.tilegame.main.entities.Player;
 import ghp.tilegame.main.gfx.ImageLoader;
+import ghp.tilegame.main.gfx.ImageManager;
 import ghp.tilegame.main.gfx.SpriteSheet;
 
 import java.awt.Canvas;
@@ -17,18 +18,18 @@ public class Game extends Canvas implements Runnable{
 	public static final int WIDTH = 1000, HEIGHT = 1000, SCALE = 1;
 	public static boolean running = false;
 	public Thread gameThread;
-	
 	private BufferedImage spriteSheet;
-	
+	private ImageManager im;
 	private Player player;
 	
 	public void init(){
 		ImageLoader loader = new ImageLoader();
+
 		spriteSheet = loader.load("/spritesheet.png");
-		
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
-		
-		player = new Player(0, 0, ss);
+		im = new ImageManager(ss);
+		player = new Player(0, 0, im);
+		this.addKeyListener(player);
 	}
 	
 	public synchronized void start(){
