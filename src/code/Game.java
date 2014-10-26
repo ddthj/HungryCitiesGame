@@ -8,8 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -27,7 +27,7 @@ public class Game extends Canvas implements KeyListener{
 	
 	public BufferedImage getImage(String path){
 		try {
-			return ImageIO.read(getClass().getResource(path));
+			return ImageIO.read(new FileInputStream(path));
 		} catch(IOException e){
 			System.err.println("Unable to find spritesheet");
 			System.exit(0);
