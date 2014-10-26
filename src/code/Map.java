@@ -1,9 +1,12 @@
 package code;
 
+import java.awt.Graphics2D;
 import java.util.Random;
 
 public class Map {
+	public int[][]gamemap;
 	private int insert;
+	private int num;
 	public void printmap(int[][] gamemap,int MAPSIZE){
 		for(int i=0;i<MAPSIZE;i++){
 			for(int j=0;j<MAPSIZE;j++){
@@ -13,40 +16,45 @@ public class Map {
 		}
 	}
 
-	public void gen(int MAPSIZE){
+	public int[][] gen(int MAPSIZE){
 		int[][] gamemap = new int[MAPSIZE][MAPSIZE];
 		int a = 0;
 		Random rand = new Random();
 		for(int x = 0;x<MAPSIZE;x++){
 			for(int y=0;y<MAPSIZE;y++){
-				insert = rand.nextInt((3-1)+1)+1;
-				if(insert==3){
-					insert += rand.nextInt((350-100)+1)+100;
+				num = rand.nextInt((100-0)+1)+0;
+				if(num <= 70){
+					insert = 1;
+				}
+				else if (num > 80){
+					insert = 2;
+				}
+				else{
+					insert = rand.nextInt((399-100)+1)+100;
 				}
 				gamemap[x][y] = insert;				
 			}
 		}
-		printmap(gamemap,MAPSIZE);
-		/*for(int i=0;i < MAPSIZE;i++){
-			insert = rand.nextInt((3-1)+1)+1;
-			if(insert > 2){
-				insert += rand.nextInt((399-100)+1)+100;
-			}
-			gamemap[i][a] = insert;
-			if(i==MAPSIZE){
-				if (a==MAPSIZE){
-					break;
-				}
-				i = 0;
-				a++;
-				
-			}*/
-			
-		
-		
-		
+		return gamemap;
+		//printmap(gamemap,MAPSIZE);
 	}
-	public void render(){
-		
+	
+	public void render(int MAPSIZE, int[][] gamemap,Graphics2D g){
+		Crop crop = new Crop();
+		for(int x=0;x<MAPSIZE;x++){
+			for(int y=0;y<MAPSIZE;y++){
+				int tile = gamemap[x][y];
+				if(tile == 1){
+					g.drawImage(crop.grass,x,y,500,500,null);
+				}
+				else if(tile ==2){
+					g.drawImage(crop.mud, x, y, 500, 500, null);
+				}
+				else{
+					g.drawImage(crop.scrap, x, y, 500, 500, null);
+				}
+			}
+			//System.out.println();
+		}
 	}
 }

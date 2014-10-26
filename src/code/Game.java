@@ -1,7 +1,9 @@
 package code;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -23,7 +25,9 @@ public class Game extends Canvas implements KeyListener{
 	private boolean left;
 	private boolean up;
 	private boolean down;
-	public static int MAPSIZE = 3;
+	public int[][] gamemap;
+	public int MAPSIZE = 9;
+	public Map map = new Map();
 	
 	public BufferedImage getImage(String path){
 		try {
@@ -56,28 +60,41 @@ public class Game extends Canvas implements KeyListener{
 		strategy = getBufferStrategy();
 		Map map = new Map();
 		Crop crop = new Crop();
-		map.gen(MAPSIZE);
+		gamemap = map.gen(MAPSIZE);
 		crop.init(spritesheet);
+		run(gamemap);
 	}
 		
-	public void run(){
-		
+	public void run(int[][]gamemap){
+		boolean gameRunning = true;
+		long last = System.nanoTime();
+		while(gameRunning){
+			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+			g.setColor(Color.black);
+			g.fillRect(0, 0, 500, 500);
+			//g.translate(500, 500);
+			map.render(MAPSIZE,gamemap,g);
+			
+		}
 	}
 	public static void main(String[] args){
 		new Game();
 	}
-	
-	
-	
-	public void keyPressed(KeyEvent arg0) {		
-	}
 
-	public void keyReleased(KeyEvent arg0) {
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	public void keyTyped(KeyEvent arg0) {
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }
