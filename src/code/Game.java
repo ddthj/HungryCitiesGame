@@ -17,27 +17,27 @@ import javax.imageio.ImageIO;
 public class Game extends Canvas implements KeyListener{
 
 	private static final long serialVersionUID = 1L;
-	private BufferedImage spritesheet;
+	private static BufferedImage spritesheet;
 	private BufferStrategy strategy;
 	private boolean right;
 	private boolean left;
 	private boolean up;
 	private boolean down;
-	public int MAPSIZE = 3;
+	public static int MAPSIZE = 3;
 	
-	
-	public void init(){
+	public BufferedImage getImage(String path){
 		try {
-			URL url = Thread.currentThread().getContextClassLoader().getResource("res/spritesheet.png");
-			if (url == null) {
-				System.err.println("Unable to find sprite: res/sprite.gif");
-				System.exit(0);
-			}
-			spritesheet = ImageIO.read(url);
-		} catch (IOException e) {
-			System.err.println("Unable to load sprite: res/sprite.gif");
+			return ImageIO.read(getClass().getResource(path));
+		} catch(IOException e){
+			System.err.println("Unable to find spritesheet");
 			System.exit(0);
 		}
+		return null;
+		
+	}
+	
+	public Game(){
+		BufferedImage spritesheet = getImage("spritesheet.png");
 		Frame frame = new Frame("Hungry Cities");
 		frame.setLayout(null);
 		setBounds(0,0,500,500);
@@ -63,7 +63,9 @@ public class Game extends Canvas implements KeyListener{
 	public void run(){
 		
 	}
-	
+	public static void main(String[] args){
+		new Game();
+	}
 	
 	
 	
@@ -77,6 +79,5 @@ public class Game extends Canvas implements KeyListener{
 	public void keyTyped(KeyEvent arg0) {
 		
 	}
-	
 
 }
