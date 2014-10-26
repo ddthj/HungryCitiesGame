@@ -72,11 +72,23 @@ public class Game extends Canvas implements KeyListener{
 			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			g.setColor(Color.black);
 			g.fillRect(0, 0, 500, 500);
-			//g.translate(500, 500);
+			g.translate(500, 500);
 			map.render(MAPSIZE,gamemap,g);
-			
+			g.dispose();
+			strategy.show();
+			try{ Thread.sleep(4); } catch(Exception e) {};
+			long delta = (System.nanoTime() - last) / 10000;
+			last = System.nanoTime();
+			for(int i=0;i<delta /5;i++){
+				tick();
+			}
 		}
 	}
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static void main(String[] args){
 		new Game();
 	}

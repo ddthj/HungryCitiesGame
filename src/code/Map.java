@@ -54,7 +54,6 @@ public class Map {
 					g.drawImage(crop.scrap, x, y, 500, 500, null);
 				}
 			}
-			//System.out.println();
 		}
 	}
 }
