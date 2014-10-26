@@ -1,9 +1,6 @@
 package code;
 
 public class Map {
-	
-	public void generate(MAPSIZE){
-		
+	public void gen(int MAPSIZE){
 	}
-
 }
