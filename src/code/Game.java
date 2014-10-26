@@ -2,12 +2,12 @@ package code;
 
 import java.awt.Canvas;
 import java.awt.Frame;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
@@ -16,13 +16,14 @@ import javax.imageio.ImageIO;
 
 public class Game extends Canvas implements KeyListener{
 
-	private Image spritesheet;
+	private static final long serialVersionUID = 1L;
+	private BufferedImage spritesheet;
 	private BufferStrategy strategy;
 	private boolean right;
 	private boolean left;
 	private boolean up;
 	private boolean down;
-	public int MAPSIZE = 5;
+	public int MAPSIZE = 3;
 	
 	
 	public void init(){
@@ -58,10 +59,9 @@ public class Game extends Canvas implements KeyListener{
 		map.gen(MAPSIZE);
 		crop.init(spritesheet);
 	}
-	
-	
-	
+		
 	public void run(){
+		
 	}
 	
 	
